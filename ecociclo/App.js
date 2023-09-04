@@ -1,13 +1,7 @@
-// import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import LoadHome from './src/screens/LoadHome';
-import Home from './src/screens/Home';
-import { View} from 'react-native';
+import HomeLink from './src/screens/HomeLink';
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react';
-
-const Stack =  createNativeStackNavigator()
 
 async function setupSplashScreen(){
   try{
@@ -37,10 +31,7 @@ export default function App() {
    
 
     <NavigationContainer>
-     <Stack.Navigator >
-        <Stack.Screen name="Home" component={Home}/>
-
-     </Stack.Navigator>
+     <HomeLink/>
    </NavigationContainer>
   );
 }

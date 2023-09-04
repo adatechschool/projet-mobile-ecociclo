@@ -4,7 +4,8 @@ import React from 'react'
 const Buy = () => {
   return (
     <View>
-      <Text>Buy</Text>
+      <Text>Buy 
+        ggdghhfhfhhjfjhjgjjgngjnjggngjn</Text>
     </View>
   )
 }
