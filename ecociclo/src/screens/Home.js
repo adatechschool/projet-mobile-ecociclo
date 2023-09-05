@@ -66,11 +66,11 @@ const styles = StyleSheet.create({
     
   },
   shadowProp: {
-    shadowColor: 'green',
+    shadowColor: 'gray',
     shadowOffset: { width: -2, height: 20 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
-    elevation: 5, // This is for Android
+    elevation: 5,
   },
   
 });
