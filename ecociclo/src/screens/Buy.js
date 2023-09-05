@@ -3,24 +3,28 @@ import React, { useState, useEffect } from "react";
 import { TextInput } from "react-native-paper";
 import {Fake} from "./DataFake"
 
-async function Hello() {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-    const data = await response.json();
-    console.log(data);
-    return data;
-  } catch (error) {
-    console.log("There was an error", error);
-  }
-}
+// async function Hello() {
+//   try {
+//     const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+//     const data = await response.json();
+//     console.log(data);
+//     return data;
+//   } catch (error) {
+//     console.log("There was an error", error);
+//   }
+// }
 
 const Buy = () => {
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
-  useEffect(() => {
-    Hello().then((responseData) => setData(responseData));
-  }, []);
+  // useEffect(() => {
+  //   Hello().then((responseData) => setData(responseData));
+  // }, []);
+
+  const arrond = [
+    
+  ]
 
   return (
     <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -51,9 +55,9 @@ const Buy = () => {
         )}
       </View>
       <ScrollView>
-        {data ? (
-          data.map((post) => (
-            <View style={styles.post} key={post.id}>
+        {Fake ? (
+          Fake.map((post) => (
+            <View style={styles.boxinfos} key={post.id}>
               <Text>{post.nom}</Text>
               <Text>ouverture: {post.ouverture}</Text>
               <Text>heure: {post.timeD }, {post.timeF} </Text>
@@ -84,13 +88,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
   },
-  post: {
+  boxinfos: {
     backgroundColor: "pink",
-    height: boxWidth / 2,
+    minHeight: boxWidth / 1.5, // To Modify
     width: boxWidth * 2,
     margin: 10,
     borderRadius: 5,
-    overflow: "scroll",
+    overflow:"visible",
+    padding: 10,
   },
   input: {
     backgroundColor: "#B8C3D3",
