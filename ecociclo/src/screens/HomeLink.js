@@ -5,6 +5,7 @@ import Buy from "./Buy";
 import Recycle from "./Recycle"
 import Favorite from "./Favorite"
 import Home from './Home';
+import ProductFilter from './ProductFilter';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 const Tab = createMaterialBottomTabNavigator()
 
@@ -23,7 +24,7 @@ const BuyStack = createNativeStackNavigator();
 function BuyStackScreen() {
   return (
     <BuyStack.Navigator>
-      <BuyStack.Screen name="J'achete" component={Buy} />
+      <BuyStack.Screen name="J'achete ou Je récupère" component={Buy} />
     </BuyStack.Navigator>
   );
 }
@@ -32,7 +33,7 @@ const RecycleStack = createNativeStackNavigator();
 function RecycleStackScreen() {
   return (
     <RecycleStack.Navigator>
-      <RecycleStack.Screen name="Je vends ou je donne" component={Recycle} />
+      <RecycleStack.Screen name="Je vends ou Je donne" component={Recycle} />
     </RecycleStack.Navigator>
   );
 }
@@ -44,6 +45,16 @@ function FavoriteStackScreen() {
       <FavoriteStack.Screen name="Mes Favoris" component={Favorite} />
     </FavoriteStack.Navigator>
   );
+}
+
+const ProductFilterStack = createNativeStackNavigator();
+
+function ProductFilterScreen(){
+  return (
+    <ProductFilterStack.Navigator>
+      <ProductFilterStack.Screen name="Produit" component={ProductFilter}/>
+    </ProductFilterStack.Navigator>
+  )
 }
 
 export default function HomeLink() {

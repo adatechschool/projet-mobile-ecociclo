@@ -8,8 +8,8 @@
     "userInterfaceStyle": "light",
     "splash": {
       "image": "./assets/eco10.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#F2668B"
+      "resizeMode": "center",
+      "backgroundColor": "#32A89C"
     },
     "assetBundlePatterns": [
       "**/*"

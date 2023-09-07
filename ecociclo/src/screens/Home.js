@@ -1,17 +1,17 @@
-import { StyleSheet, Text, View, FlatList, Dimensions } from "react-native";
-
+import { StyleSheet, Image, Text, View, FlatList, Dimensions } from "react-native";
+import market from'../../assets/market.png'
 import React from "react";
 
 const Recycle = () => {
   const box = [
-    { key: '1', backgroundColor: "#F2C6C2", text:'Acheter' },
-    { key: '2', backgroundColor: "#32A89C", text:'Recycler'  }
+    { key: '1', backgroundColor: "#F2C6C2", text:'Acheter des nouvelles pépites', },
+    { key: '2', backgroundColor: "#32A89C", text:'Donner ou Vendre'  }
   ];
   return (
     <View style={styles.container}>
       <View style={styles.title}>
-        <Text style={styles.text}>Acheter, récuperer vos nouvelles pépites</Text >
-        <Text style={styles.text}>Donner, vender et faîtes des heureux</Text> 
+        <Text style={styles.text}>Achetez, Récuperez ... </Text >
+        <Text style={styles.text}>Donnez, vendez et faîtes des heureux</Text> 
       </View>
      
     <FlatList
@@ -25,6 +25,13 @@ const Recycle = () => {
       keyExtractor={(item) => item.key}
       contentContainerStyle={styles.flatListContent}
     />
+    <View>
+        <Image
+          style={styles.market}
+          source={market}
+        />
+    </View>
+
     </View>
   );
 };
@@ -46,18 +53,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '80%',
     height: '80%',
+    marginTop:20,
+
   },
   box: {
     height: boxWidth / 2.5,
     width: boxWidth,
-    margin:15,
+    margin:20,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,
     
   },
   title: {
-    marginTop: 20,
+    marginTop: 40,
     fontSize: 20,
     fontWeight: 'bold',
   },
@@ -72,5 +81,9 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     elevation: 5,
   },
+  market:{
+    width:370,
+    height:150,
+  }
   
 });

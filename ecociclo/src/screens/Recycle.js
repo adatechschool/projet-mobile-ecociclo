@@ -1,9 +1,11 @@
-import { StyleSheet, Text, View, FlatList, Dimensions } from "react-native";
+import { StyleSheet, Text, View, FlatList, Dimensions, TouchableOpacity} from "react-native";
 import React from "react";
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
+import { Link, NavigationContainer, useNavigation } from "@react-navigation/native";
+import ProductFilter from "./ProductFilter";
 // import { Icon } from '@rneui/themed';
 
-const Recycle = () => {
+const Recycle = ({navigation})=> {
   const box = [
     { key: '1', backgroundColor: "#F5E8DA", text:'Furniture', icon:'sofa-single'},
     { key: '2', backgroundColor: "#A7B6D9", text:'Clothing', icon: 'tshirt-crew' },
@@ -13,21 +15,28 @@ const Recycle = () => {
   return (
     <View style={styles.container}>
       <View style={styles.title}>
-         <Text style={{fontSize:20}}>Recyclez proche de chez soi</Text>
+         <Text style={{fontSize:20}}>Selectionner le produit </Text>
       </View>
     
     <FlatList
     
       data={box}
       renderItem={({ item }) => (
+        <TouchableOpacity
+      //     onPress={()=> navigation.navigate('ProductFilter')
+            
+      // }
+        >
         <View style={[styles.box, { backgroundColor: item.backgroundColor }]}>
             <Icon name={item.icon} size={50} color={'#4C4A59'}/>
             {/* <Text>{item.text}</Text> */}
         </View>
+        </TouchableOpacity>
     )}
       numColumns={2}
       keyExtractor={(item) => item.key}
       contentContainerStyle={styles.flatListContent}
+      
     />
     </View>
   );
