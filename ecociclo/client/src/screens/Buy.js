@@ -2,35 +2,35 @@ import { ScrollView, StyleSheet, Text, View, Dimensions, TouchableWithoutFeedbac
 import React, { useState, useEffect } from "react";
 import{Picker} from "@react-native-picker/picker"
 import { TextInput } from "react-native-paper";
-import {Fake} from "./DataFake"
+// import {Fake} from "./DataFake"
 
-// async function Hello() {
-//   try {
-//     const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-//     const data = await response.json();
-//     console.log(data);
-//     return data;
-//   } catch (error) {
-//     console.log("There was an error", error);
-//   }
-// }
+async function Hello() {
+  try {
+    const response = await fetch("http://localhost:8000/api/data");
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log("There was an error", error);
+  }
+}
 
 const Buy = () => {
-  // const [data, setData] = useState(null);
+  const [data, setData] = useState(null);
   
 
-  // useEffect(() => {
-  //   Hello().then((responseData) => setData(responseData));
-  // }, []);
+  useEffect(() => {
+    Hello().then((responseData) => setData(responseData));
+  }, []);
   
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const [allData, setAllData] = useState(Fake);
+  // const [allData, setAllData] = useState(Fake);
   const [selectCity, setSelectCity] = useState(null);
   const [filteredMarket, setFilteredMarket] = useState([]);
 
   const handleCitySelected = (city) => {
     const cityNumber = parseInt(city)
-    const filteredData = allData.filter(market => market.ardt === cityNumber);
+    const filteredData = data.filter(market => market.ardt === cityNumber);
     setSelectCity(cityNumber);
     setFilteredMarket(filteredData);
         console.log('selectCity:',cityNumber);
