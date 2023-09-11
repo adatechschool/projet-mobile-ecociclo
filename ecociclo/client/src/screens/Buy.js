@@ -40,7 +40,7 @@ const Buy = () => {
   
 
   return (
-    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+    <TouchableWithoutFeedback onPress={() => setIsMenuVisible(false)}>
     <View style={styles.container}>
       <View style={styles.inputContainer}>
     
@@ -60,6 +60,7 @@ const Buy = () => {
  
 
         {isMenuVisible && (
+            <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
           <View style={styles.Menu}>
             <Picker
               selectedValue = {selectCity}
@@ -87,9 +88,11 @@ const Buy = () => {
               <Picker.Item label = "20e arrondissement" value= {20}/>
             </Picker>
           </View>
+             
+             </TouchableWithoutFeedback>
         )}        
         </View>
-        
+
         <ScrollView>
           {filteredMarket.length > 0 ? (
             filteredMarket.map((post)=> (
