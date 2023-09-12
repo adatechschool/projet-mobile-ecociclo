@@ -28,7 +28,7 @@ async function Hello() {
   }
 }
 
-const Buy = () => {
+const Buy = ({navigation}) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -110,7 +110,16 @@ const Buy = () => {
                   Heure: {post.timeD}, {post.timeF}{" "}
                 </Text>
                 <Text style={styles.text}>Adresse: {post.adresse}</Text>
-                <Button title="google map" color="grey" />
+
+                <Button onPress={() => {
+                  console.log(post)
+                  navigation.navigate('Favorite', {
+                    postFavorite: post
+                  });
+                }} 
+                title="💙"
+              color="grey" 
+              />
               </View>
             ))
           ) : (
