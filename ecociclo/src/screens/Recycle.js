@@ -2,16 +2,29 @@ import { StyleSheet, Text, View, FlatList, Dimensions, TouchableOpacity} from "r
 import React from "react";
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 import { Link, NavigationContainer, useNavigation } from "@react-navigation/native";
-import ProductFilter from "./ProductFilter";
-// import { Icon } from '@rneui/themed';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+
+export const box = [
+    { key: 1, backgroundColor: "#F5E8DA", text:'Furniture', icon:'sofa-single'},
+    { key: 2, backgroundColor: "#A7B6D9", text:'Clothing', icon: 'tshirt-crew' },
+    { key: 3, backgroundColor: "#B8C3D3", text:'Household appliances',icon:'washing-machine'},
+    { key: 4, backgroundColor: "#9ABDAD", text:'Compost' ,icon:'flower'},
+  ];
 
 const Recycle = ({navigation})=> {
-  const box = [
-    { key: '1', backgroundColor: "#F5E8DA", text:'Furniture', icon:'sofa-single'},
-    { key: '2', backgroundColor: "#A7B6D9", text:'Clothing', icon: 'tshirt-crew' },
-    { key: '3', backgroundColor: "#B8C3D3", text:'Household appliances',icon:'washing-machine'},
-    { key: '4', backgroundColor: "#9ABDAD", text:'Compost' ,icon:'flower'},
-  ];
+ 
+
+  // const navigation = useNavigation();
+
+  // const handleBoxPress = (boxId) => {
+  //   return (
+  //   navigation.navigate('Produit', {boxId})
+  //   )
+  //   // console.log({boxId});
+
+  // }    
+
   return (
     <View style={styles.container}>
       <View style={styles.title}>
@@ -23,9 +36,11 @@ const Recycle = ({navigation})=> {
       data={box}
       renderItem={({ item }) => (
         <TouchableOpacity
-      //     onPress={()=> navigation.navigate('ProductFilter')
+          onPress={()=>navigation.navigate('Produit', {
+            boxId:item.key 
+          })
             
-      // }
+      }
         >
         <View style={[styles.box, { backgroundColor: item.backgroundColor }]}>
             <Icon name={item.icon} size={50} color={'#4C4A59'}/>

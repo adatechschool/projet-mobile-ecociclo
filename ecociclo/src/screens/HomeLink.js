@@ -47,20 +47,21 @@ function FavoriteStackScreen() {
   );
 }
 
-const ProductFilterStack = createNativeStackNavigator();
+// const ProductFilterStack = createNativeStackNavigator();
 
-function ProductFilterScreen(){
-  return (
-    <ProductFilterStack.Navigator>
-      <ProductFilterStack.Screen name="Produit" component={ProductFilter}/>
-    </ProductFilterStack.Navigator>
-  )
-}
+// export function ProductFilterStackScreen(){
+//   return (
+//     <ProductFilterStack.Navigator>
+//       <ProductFilterStack.Screen name="Mes Produit" component={ProductFilter}/>
+//     </ProductFilterStack.Navigator>
+//   )
+// }
+
+
 
 export default function HomeLink() {
   return (
-   
-   
+  
 
       <Tab.Navigator 
       activeTintColor='purple' 
@@ -95,10 +96,16 @@ export default function HomeLink() {
             <Icon name="heart" color={color} size={24} />
            ),
         }}
+        // />
+        // <Tab.Screen 
+        //  name="Produit" 
+        //    component={ProductFilterStackScreen}
+        //    options={{
+        //     visible:true
+        // }}
 />
 
       </Tab.Navigator>
 
-  
   )
 }

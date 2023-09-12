@@ -9,6 +9,7 @@ export const Fake = [
     nom: 'Cacao',
     adresse: '63 Rue des Pyrénées, 75020 Paris',
     ouverture: 'Mardi ,mercredi, jeudi, vendredi, samedi, dimanche',
+    tag: 'clothing',
     id: 1
 
    },
@@ -20,6 +21,7 @@ export const Fake = [
     nom:'Decathlon',
     adresse:'Metro Madeleine, 23 Bd de la Madeleine, 75001 Paris',
     ouverture: 'lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche',
+    tag:'Furniture',
     id:2
 
    },
@@ -31,6 +33,7 @@ export const Fake = [
     nom:'Portovouil',
     adresse: '4 Pl. Louis-Armand',
     ouverture: 'Mardi, mercredi, samedi',
+    tag: 'Household appliances',
     id: 3
     
    },
@@ -42,6 +45,7 @@ export const Fake = [
     nom:'zara',
     adresse:  ' 201 Rue du Temple',
     ouverture: 'lundi, mardi, jeudi, vendredi, mercredi',
+    tag: 'Compost',
     id:4
 
    },
@@ -53,6 +57,7 @@ export const Fake = [
     nom:'zalando',
     adresse:'104 Bd Saint-Germain, 75006 Paris',
     ouverture:'lundi, mardi, mercredi,jeudi',
+    tag: 'Compost',
     id:5
 
    }

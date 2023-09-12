@@ -2,6 +2,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeLink from './src/screens/HomeLink';
 import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react';
+import ProductFilter from './src/screens/ProductFilter';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+const Stack = createNativeStackNavigator();
 
 async function setupSplashScreen(){
   try{
@@ -28,11 +32,21 @@ export default function App() {
   }, []);
 
   return (
-   
-
     <NavigationContainer>
-     <HomeLink/>
-   </NavigationContainer>
+    <Stack.Navigator initialRouteName='HomeTab'>
+      <Stack.Screen
+        name="HomeTab"
+        component={HomeLink}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen name="Produit" component={ProductFilter} />
+    </Stack.Navigator>
+  </NavigationContainer>
+
+  //   <NavigationContainer>
+  //    <HomeLink/>
+     
+  //  </NavigationContainer>
   );
 }
 
