@@ -17,7 +17,7 @@ async function Hello() {
   try {
     // But your Ip address instead of localhost for your phone and the 
     //server to be on the same Ip and the phone to be able to access the server
-    const response = await fetch("http://192.168.1.78:8000/api/data");
+    const response = await fetch("http://192.168.4.142:8000/api/data");
     const data = await response.json();
     // console.log(data);
     return data;
