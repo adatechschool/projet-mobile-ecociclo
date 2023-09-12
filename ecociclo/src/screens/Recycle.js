@@ -8,27 +8,17 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 export const box = [
     { key: 1, backgroundColor: "#F5E8DA", text:'Furniture', icon:'sofa-single'},
     { key: 2, backgroundColor: "#A7B6D9", text:'Clothing', icon: 'tshirt-crew' },
-    { key: 3, backgroundColor: "#B8C3D3", text:'Household appliances',icon:'washing-machine'},
+    { key: 3, backgroundColor: "#B8C3D3", text:'Household',icon:'washing-machine'},
     { key: 4, backgroundColor: "#9ABDAD", text:'Compost' ,icon:'flower'},
   ];
 
 const Recycle = ({navigation})=> {
- 
-
-  // const navigation = useNavigation();
-
-  // const handleBoxPress = (boxId) => {
-  //   return (
-  //   navigation.navigate('Produit', {boxId})
-  //   )
-  //   // console.log({boxId});
-
-  // }    
+    
 
   return (
     <View style={styles.container}>
       <View style={styles.title}>
-         <Text style={{fontSize:20}}>Selectionner le produit </Text>
+         <Text style={{fontSize:25}}>Selectionner un produit </Text>
       </View>
     
     <FlatList
@@ -37,7 +27,8 @@ const Recycle = ({navigation})=> {
       renderItem={({ item }) => (
         <TouchableOpacity
           onPress={()=>navigation.navigate('Produit', {
-            boxId:item.key 
+            boxId:item.key,
+            boxText: item.text
           })
             
       }
@@ -74,6 +65,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     height: '80%',
+    marginTop: 20
   },
   box: {
     height: boxWidth,
@@ -84,8 +76,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   title: {
-    marginTop: 20,
-    fontSize: 20,
+    marginTop: 30,
     fontWeight: 'bold',
   },
 });

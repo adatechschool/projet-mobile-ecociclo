@@ -4,14 +4,14 @@ import React from "react";
 
 const Recycle = () => {
   const box = [
-    { key: '1', backgroundColor: "#F2C6C2", text:'Acheter des nouvelles pépites', },
+    { key: '1', backgroundColor: "#F2C6C2", text:'Acheter ou Récupérer', },
     { key: '2', backgroundColor: "#32A89C", text:'Donner ou Vendre'  }
   ];
   return (
     <View style={styles.container}>
       <View style={styles.title}>
-        <Text style={styles.text}>Achetez, Récuperez ... </Text >
-        <Text style={styles.text}>Donnez, vendez et faîtes des heureux</Text> 
+        <Text style={{fontSize:25}}>Faîtes des heureux </Text >
+        {/* <Text style={{fontSize:25}}>Donnez, vendez et faîtes des heureux</Text>  */}
       </View>
      
     <FlatList
@@ -19,7 +19,7 @@ const Recycle = () => {
       data={box}
       renderItem={({ item }) => (
         <View style={[styles.box,styles.shadowProp, { backgroundColor: item.backgroundColor}]}>
-        <Text>{item.text}</Text>
+        <Text style={{fontSize:23}}>{item.text}</Text>
         </View>
       )}
       keyExtractor={(item) => item.key}
@@ -53,10 +53,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '80%',
     height: '80%',
-    marginTop:20,
+    marginTop:30,
 
   },
   box: {
+  
     height: boxWidth / 2.5,
     width: boxWidth,
     margin:20,
@@ -82,8 +83,8 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   market:{
-    width:370,
-    height:150,
+    width:390,
+    height:160,
   }
   
 });
