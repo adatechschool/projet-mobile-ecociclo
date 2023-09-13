@@ -7,6 +7,7 @@ const marketAndRecycleSchema = new mongoose.Schema({
     nom: { type: String, required: true },
     adresse: { type: String, required: true },
     ouverture: { type: String, required: true },
+    tag: { type: String, required: true },
     // id: { type: Number, required: true }
 });
 
