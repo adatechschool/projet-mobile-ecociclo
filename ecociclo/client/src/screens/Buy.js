@@ -1,5 +1,6 @@
 import {
   ScrollView,
+  Image,
   StyleSheet,
   Text,
   View,
@@ -11,6 +12,8 @@ import {
 import React, { useState, useEffect } from "react";
 import { Picker } from "@react-native-picker/picker";
 import { TextInput } from "react-native-paper";
+import adress4 from'../../assets/adress4.png'
+
 // import {Fake} from "./DataFake"
 
 async function Hello() {
@@ -52,16 +55,19 @@ const Buy = ({navigation}) => {
   return (
     <TouchableWithoutFeedback onPress={() => setIsMenuVisible(false)}>
       <View style={styles.container}>
+        <View style={styles.title}>
+          <Text style={{fontSize:25}}>Selectionner un arrondissement </Text>
+        </View>
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
-            placeholder="Choisir l'arrondissement"
+            placeholder="Cliquer"
             underlineColorAndroid="transparent"
             right={
               <TextInput.Icon
                 color="purple"
                 icon={isMenuVisible ? "menu-up" : "menu-down"}
-                size={40}
+                size={50}
                 onPress={() => setIsMenuVisible(!isMenuVisible)}
               />
             }
@@ -123,7 +129,14 @@ const Buy = ({navigation}) => {
               </View>
             ))
           ) : (
-            <Text>On y est presque ...</Text>
+            <View style={styles.container}>
+            <Text style={{fontSize:20, margin: 20}}>On y est presque ...</Text>
+
+          <Image
+            style={styles.adress}
+            source={adress4}
+          />
+          </View>
 
           )}
         </ScrollView>
@@ -157,6 +170,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#B8C3D3",
     multiline: "true",
     width: boxWidth * 1.4,
+    fontSize:20,
     margin:20,
   },
   buttonText: {
@@ -185,6 +199,14 @@ const styles = StyleSheet.create({
   },
   text:{
     marginBottom:5,
+  },
+  title: {
+    marginTop: 30,
+    fontWeight: 'bold',
+  },
+  adress:{
+    width:370,
+    height:350,
   }
   
 });
