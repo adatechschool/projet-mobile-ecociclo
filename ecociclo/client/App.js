@@ -4,6 +4,7 @@ import * as SplashScreen from 'expo-splash-screen'
 import { useEffect } from 'react';
 import ProductFilter from './src/screens/ProductFilter';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Favorite from './src/screens/Favorite';
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +41,7 @@ export default function App() {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="Produit" component={ProductFilter} />
+      <Stack.Screen name="Favorite" component={Favorite} />
     </Stack.Navigator>
   </NavigationContainer>
 
