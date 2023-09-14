@@ -120,7 +120,7 @@ const Buy = ({navigation}) => {
                 <Button onPress={() => {
                   console.log(post)
                   navigation.navigate('Favorite', {
-                    postFavorite: post
+                    postFavorite: [post]
                   });
                 }} 
                 title="💙"
