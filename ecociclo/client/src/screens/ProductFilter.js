@@ -4,7 +4,7 @@ import {box} from './Recycle'
 import{Picker} from "@react-native-picker/picker"
 import { TextInput } from "react-native-paper";
 import {Fake} from "./DataFake"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 
@@ -12,7 +12,39 @@ import { useState } from 'react';
 
 const ProductFilter = ({route}) => {
   const {boxId, boxText} = route.params;
+  console.log({boxId});
+  console.log({boxText})
 
+  const [isMenuVisible, setIsMenuVisible] = useState(false);
+  const [data, setData] = useState(null);
+  const [selectCity, setSelectCity] = useState(null);
+  const [filteredMarket, setFilteredMarket] = useState([]);
+  
+  useEffect(() => {
+
+    async function ProductData() {
+      try {
+    // But your Ip address instead of localhost for your phone and the 
+    //server to be on the same Ip and the phone to be able to access the server
+    //
+    console.log('hello');
+        const response = await fetch("http://192.168.4.211:8000/api/data");
+        // console.log(response);
+    
+        const jsondata = await response.json();
+        setData(jsondata)
+        console.log(setData);
+      } catch (error) {
+        console.log("There was an error", error);
+        return []; // handlea filter error
+      }
+    }
+
+  ProductData();
+  }, []);
+  
+
+  
   const imageSource = 
     { 
     'Furniture':require('../../assets/meub.png'),
@@ -21,24 +53,19 @@ const ProductFilter = ({route}) => {
     'Compost':require('../../assets/compost3.png'),
   };
   
-
-  console.log({boxId});
-  console.log({boxText})
-
   const selectedImageSource = imageSource[boxText] || null
 
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const [allData, setAllData] = useState(Fake);
-  const [selectCity, setSelectCity] = useState(null);
-  const [filteredMarket, setFilteredMarket] = useState([]);
+
+ 
+
 
   const handleCitySelected = (city) => {
     const cityNumber = parseInt(city)
-    const filteredData = allData.filter((market) => market.ardt === cityNumber && market.tag ===boxText);
+    const filteredData = data.filter((market) => market.ardt === cityNumber && market.tag ===boxText);
     setSelectCity(cityNumber);
-    console.log(filteredData);
+    // console.log(filteredData);
     setFilteredMarket(filteredData);
-        console.log('selectCity:',cityNumber);
+        // console.log('selectCity:',cityNumber);
 
 
   }
@@ -192,7 +219,7 @@ const ProductFilter = ({route}) => {
       borderColor: "#ccc",
     },
     Title:{
-      fontSize:40,
+      fontSize:20,
     
     },
     text:{

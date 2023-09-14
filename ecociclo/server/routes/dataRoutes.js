@@ -6,6 +6,7 @@ const router = express.Router();
 router.get("/data", async (req, res) => {
     try {
         const allData = await MarketAndRecycle.find();
+        res.setHeader("Content-Type", "application/json");
         res.json(allData);
     } catch (error) {
         res.status(500).json({ error: "Failed to retrieve data" });
