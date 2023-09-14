@@ -1,12 +1,13 @@
-import { StyleSheet, Image, Text, View, FlatList, Dimensions } from "react-native";
+import { StyleSheet, Image, Text, View, FlatList, Dimensions, TouchableOpacity } from "react-native";
 import market from'../../assets/market.png'
 import React from "react";
 
-const Recycle = () => {
+const Recycle = ({ navigation }) => {
   const box = [
-    { key: '1', backgroundColor: "#F2C6C2", text:'Acheter ou Récupérer', },
-    { key: '2', backgroundColor: "#32A89C", text:'Donner ou Vendre'  }
+    { key: '1', backgroundColor: "#F2C6C2", text: 'Acheter ou Récupérer', tag: 'Buy' },
+    { key: '2', backgroundColor: "#32A89C", text: 'Donner ou Vendre', tag: 'Recycle' }
   ];
+  
   return (
     <View style={styles.container}>
       <View style={styles.title}>
@@ -18,9 +19,16 @@ const Recycle = () => {
     
       data={box}
       renderItem={({ item }) => (
+        <TouchableOpacity
+        onPress={() => navigation.navigate(item.tag === 'Buy' ? 'Buy' : 'Recycle',{
+          boxId: item.key,
+          boxText: item.text
+        })}
+      >
         <View style={[styles.box,styles.shadowProp, { backgroundColor: item.backgroundColor}]}>
         <Text style={{fontSize:23}}>{item.text}</Text>
         </View>
+        </TouchableOpacity> 
       )}
       keyExtractor={(item) => item.key}
       contentContainerStyle={styles.flatListContent}

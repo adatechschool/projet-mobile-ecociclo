@@ -12,13 +12,14 @@ import {
 import React, { useState, useEffect } from "react";
 import { Picker } from "@react-native-picker/picker";
 import { TextInput } from "react-native-paper";
-import adress4 from'../../assets/adress4.png'
+import adress4 from "../../assets/adress4.png";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // import {Fake} from "./DataFake"
 
 async function Hello() {
   try {
-    // But your Ip address instead of localhost for your phone and the 
+    // But your Ip address instead of localhost for your phone and the
     //server to be on the same Ip and the phone to be able to access the server
     //
     const response = await fetch("http://localhost:8000/api/data");
@@ -31,7 +32,7 @@ async function Hello() {
   }
 }
 
-const Buy = ({navigation}) => {
+const Buy = ({ navigation }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const Buy = ({navigation}) => {
     <TouchableWithoutFeedback onPress={() => setIsMenuVisible(false)}>
       <View style={styles.container}>
         <View style={styles.title}>
-          <Text style={{fontSize:25}}>Selectionner un arrondissement </Text>
+          <Text style={{ fontSize: 25 }}>Selectionner un arrondissement </Text>
         </View>
         <View style={styles.inputContainer}>
           <TextInput
@@ -117,7 +118,7 @@ const Buy = ({navigation}) => {
                 </Text>
                 <Text style={styles.text}>Adresse: {post.adresse}</Text>
 
-                <Button onPress={() => {
+                {/* <Button onPress={() => {
                   console.log(post)
                   navigation.navigate('Favorite', {
                     postFavorite: [post]
@@ -125,23 +126,46 @@ const Buy = ({navigation}) => {
                 }} 
                 title="💙"
               color="grey" 
-              />
+              /> */}
+
+                <Button
+                  onPress={async () => {
+                    try {
+                      const favorites = await AsyncStorage.getItem("favorites");
+                      const parsedFavorites = favorites
+                        ? JSON.parse(favorites)
+                        : [];
+                      if (
+                        !parsedFavorites.some((fav) => fav._id === post._id)
+                      ) {
+                        parsedFavorites.push(post);
+                        await AsyncStorage.setItem(
+                          "favorites",
+                          JSON.stringify(parsedFavorites)
+                        );
+                      } else {
+                        console.log("You already add this adress to favorites");
+                      }
+                    } catch (error) {
+                      console.error("Failed to save favorite:", error);
+                    }
+                  }}
+                  title="💙"
+                  color="grey"
+                />
               </View>
             ))
           ) : (
             <View style={styles.container}>
-            <Text style={{fontSize:20, margin: 20}}>On y est presque ...</Text>
+              <Text style={{ fontSize: 20, margin: 20 }}>
+                On y est presque ...
+              </Text>
 
-          <Image
-            style={styles.adress}
-            source={adress4}
-          />
-          </View>
-
+              <Image style={styles.adress} source={adress4} />
+            </View>
           )}
         </ScrollView>
       </View>
-
     </TouchableWithoutFeedback>
   );
 };
@@ -163,15 +187,15 @@ const styles = StyleSheet.create({
     width: boxWidth * 2,
     margin: 10,
     borderRadius: 5,
-    overflow:"visible",
-    padding:10,
+    overflow: "visible",
+    padding: 10,
   },
   input: {
     backgroundColor: "#B8C3D3",
     multiline: "true",
     width: boxWidth * 1.4,
-    fontSize:20,
-    margin:20,
+    fontSize: 20,
+    margin: 20,
   },
   buttonText: {
     color: "white",
@@ -193,20 +217,18 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
   },
-  Title:{
-    fontSize:20,
-  
+  Title: {
+    fontSize: 20,
   },
-  text:{
-    marginBottom:5,
+  text: {
+    marginBottom: 5,
   },
   title: {
     marginTop: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
-  adress:{
-    width:370,
-    height:350,
-  }
-  
+  adress: {
+    width: 370,
+    height: 350,
+  },
 });
