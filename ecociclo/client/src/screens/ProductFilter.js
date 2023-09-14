@@ -55,9 +55,15 @@ const ProductFilter = ({route}) => {
   
   const selectedImageSource = imageSource[boxText] || null
 
-
- 
-
+  const sentence = 
+  {
+    'Furniture':"Points d'apport volontaire - Recycleries et ressourceries",
+    'Clothing':"Points d'apport volontaire - Recycleries et ressourceries",
+    'Household':"Points d'apport volontaire - Recycleries et ressourceries",
+    'Compost':'Les marchés de proximité collectent vos déchets alimentaires',
+  };
+  
+  const selectedSentence = sentence[boxText] || null
 
   const handleCitySelected = (city) => {
     const cityNumber = parseInt(city)
@@ -76,6 +82,13 @@ const ProductFilter = ({route}) => {
 
       <View style={styles.Maintitle}>
           <Text style={{fontSize:30}}> {boxText} </Text>
+          
+          {selectedSentence && (
+                      <Text style={{fontSize:20, margin: 10, textAlign: 'center'}}>
+                        {selectedSentence}
+                      </Text>
+                      
+                    )}
       </View>
     
     
@@ -226,9 +239,13 @@ const ProductFilter = ({route}) => {
       marginBottom:5,
     },
     Maintitle: {
+      display:'flex',
       marginTop: 30,
       fontSize: 40,
       fontWeight: 'bold',
+      alignItems: 'center',
+      textAlign: 'center'
+      
     },
     images:{
       marginBottom: 0,
