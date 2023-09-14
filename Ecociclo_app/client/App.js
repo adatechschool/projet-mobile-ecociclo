@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 import ProductFilter from './src/screens/ProductFilter';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Favorite from './src/screens/Favorite';
+import Buy from './src/screens/Buy';
+import Recycle from './src/screens/Recycle';
 
 const Stack = createNativeStackNavigator();
 
@@ -42,6 +44,8 @@ export default function App() {
       />
       <Stack.Screen name="Produit" component={ProductFilter} />
       <Stack.Screen name="Favorite" component={Favorite} />
+      <Stack.Screen name="Buy" component={Buy} />
+      <Stack.Screen name="Recycle" component={Recycle} />
     </Stack.Navigator>
   </NavigationContainer>
 
