@@ -14,44 +14,17 @@ import React, { useState, useEffect }  from "react";
 import { box } from "./Recycle";
 import { Picker } from "@react-native-picker/picker";
 import { TextInput } from "react-native-paper";
-<<<<<<< HEAD
-import {Fake} from "./DataFake"
-import { useState, useEffect } from 'react';
-=======
 import { Fake } from "./DataFake";
->>>>>>> clothingtagworks
 
 
-async function Hello() {
-  try {
-    // But your Ip address instead of localhost for your phone and the 
-    //server to be on the same Ip and the phone to be able to access the server
-    //
-    const response = await fetch("http://192.168.1.78:8000/api/data");
-    const data = await response.json();
-    // console.log(data);
-    return data;
-  } catch (error) {
-    console.log("There was an error", error);
-    return []; // handlea filter error
-  }
-}
 
 const ProductFilter = ({ route }) => {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    Hello().then((responseData) => setData(responseData));
-  }, []);
-
-<<<<<<< HEAD
-const ProductFilter = ({route}) => {
   const {boxId, boxText} = route.params;
   console.log({boxId});
   console.log({boxText})
 
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
   const [selectCity, setSelectCity] = useState(null);
   const [filteredMarket, setFilteredMarket] = useState([]);
   
@@ -103,49 +76,17 @@ const ProductFilter = ({route}) => {
   const handleCitySelected = (city) => {
     const cityNumber = parseInt(city)
     const filteredData = data.filter((market) => market.ardt === cityNumber && market.tag ===boxText);
-=======
-  const { boxId, boxText } = route.params;
-
-  const imageSource = {
-    Furniture: require("../../assets/meub.png"),
-    Clothing: require("../../assets/cloth.png"),
-    Household: require("../../assets/elect3.png"),
-    Compost: require("../../assets/compost3.png"),
-  };
-
-  console.log({ boxId });
-  console.log({ boxText });
-
-  const selectedImageSource = imageSource[boxText] || null;
-
-  const [isMenuVisible, setIsMenuVisible] = useState(false);
-  // const [allData, setAllData] = useState(Fake);
-  const [selectCity, setSelectCity] = useState(null);
-  const [filteredMarket, setFilteredMarket] = useState([]);
-
-  const handleCitySelected = (city) => {
-    const cityNumber = parseInt(city);
-    const filteredData = data.filter(
-      (market) => market.ardt === cityNumber && market.tag === boxText
-    );
->>>>>>> clothingtagworks
     setSelectCity(cityNumber);
     // console.log(filteredData);
     setFilteredMarket(filteredData);
-<<<<<<< HEAD
         // console.log('selectCity:',cityNumber);
 
 
   }
-=======
-    console.log("selectCity:", cityNumber);
-  };
->>>>>>> clothingtagworks
 
   return (
     <View style={styles.container}>
       <View style={styles.Maintitle}>
-<<<<<<< HEAD
           <Text style={{fontSize:30}}> {boxText} </Text>
           
           {selectedSentence && (
@@ -154,9 +95,6 @@ const ProductFilter = ({route}) => {
                       </Text>
                       
                     )}
-=======
-        <Text style={{ fontSize: 30 }}> {boxText} </Text>
->>>>>>> clothingtagworks
       </View>
 
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -238,7 +176,6 @@ const ProductFilter = ({route}) => {
   );
 };
 
-<<<<<<< HEAD
   const screenWidth = Dimensions.get("window").width;
   const boxWidth = (screenWidth - 40) / 2;
   
@@ -310,70 +247,69 @@ const ProductFilter = ({route}) => {
   });
   
    
-=======
-export default ProductFilter;
->>>>>>> clothingtagworks
 
-const screenWidth = Dimensions.get("window").width;
-const boxWidth = (screenWidth - 40) / 2;
+// const screenWidth = Dimensions.get("window").width;
+// const boxWidth = (screenWidth - 40) / 2;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    marginTop: 20,
-  },
-  boxinfos: {
-    backgroundColor: "#F2C6C2",
-    minHeight: boxWidth / 1.5, // To Modify
-    width: boxWidth * 2,
-    margin: 10,
-    borderRadius: 5,
-    overflow: "visible",
-    padding: 10,
-  },
-  input: {
-    backgroundColor: "#B8C3D3",
-    multiline: "true",
-    width: boxWidth * 1.4,
-    margin: 20,
-    fontSize: 20,
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
-    textAlign: "center",
-  },
-  inputContainer: {
-    width: boxWidth * 2,
-    alignItems: "center",
-    zIndex: 1,
-  },
-  Menu: {
-    backgroundColor: "#f8f8f8",
-    padding: 10,
-    position: "absolute",
-    top: 60,
-    width: boxWidth * 1.4,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: "#ccc",
-  },
-  Title: {
-    fontSize: 40,
-  },
-  text: {
-    marginBottom: 5,
-  },
-  Maintitle: {
-    marginTop: 30,
-    fontSize: 40,
-    fontWeight: "bold",
-  },
-  images: {
-    marginBottom: 0,
-    width: 395,
-    height: 365,
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     alignItems: "center",
+//     marginTop: 20,
+//   },
+//   boxinfos: {
+//     backgroundColor: "#F2C6C2",
+//     minHeight: boxWidth / 1.5, // To Modify
+//     width: boxWidth * 2,
+//     margin: 10,
+//     borderRadius: 5,
+//     overflow: "visible",
+//     padding: 10,
+//   },
+//   input: {
+//     backgroundColor: "#B8C3D3",
+//     multiline: "true",
+//     width: boxWidth * 1.4,
+//     margin: 20,
+//     fontSize: 20,
+//     alignItems: "center",
+//   },
+//   buttonText: {
+//     color: "white",
+//     fontSize: 16,
+//     textAlign: "center",
+//   },
+//   inputContainer: {
+//     width: boxWidth * 2,
+//     alignItems: "center",
+//     zIndex: 1,
+//   },
+//   Menu: {
+//     backgroundColor: "#f8f8f8",
+//     padding: 10,
+//     position: "absolute",
+//     top: 60,
+//     width: boxWidth * 1.4,
+//     borderRadius: 5,
+//     borderWidth: 1,
+//     borderColor: "#ccc",
+//   },
+//   Title: {
+//     fontSize: 40,
+//   },
+//   text: {
+//     marginBottom: 5,
+//   },
+//   Maintitle: {
+//     marginTop: 30,
+//     fontSize: 40,
+//     fontWeight: "bold",
+//   },
+//   images: {
+//     marginBottom: 0,
+//     width: 395,
+//     height: 365,
+//   },
+// });
+
+export default ProductFilter
