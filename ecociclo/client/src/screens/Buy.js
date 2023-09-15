@@ -22,10 +22,13 @@ async function Hello() {
     // But your Ip address instead of localhost for your phone and the
     //server to be on the same Ip and the phone to be able to access the server
     //
-    const response = await fetch("http://localhost:8000/api/data");
+    const response = await fetch("https://opendata.paris.fr/api/explore/v2.1/catalog/datasets/marches-decouverts/records?limit=100");
     const data = await response.json();
     // console.log(data);
-    return data;
+    let result = data["results"]
+    // console.log(result);
+    return result;
+
   } catch (error) {
     console.log("There was an error", error);
     return []; // handlea filter error
@@ -33,10 +36,10 @@ async function Hello() {
 }
 
 const Buy = ({ navigation }) => {
-  const [data, setData] = useState([]);
+  const [result, setResult] = useState([]);
 
   useEffect(() => {
-    Hello().then((responseData) => setData(responseData));
+    Hello().then((responseData) => setResult(responseData));
   }, []);
 
   const [isMenuVisible, setIsMenuVisible] = useState(false);
@@ -47,7 +50,11 @@ const Buy = ({ navigation }) => {
 
   const handleCitySelected = (city) => {
     const cityNumber = parseInt(city);
-    const filteredData = data.filter((market) => market.ardt === cityNumber);
+    // let gre = result[0]
+    // let gret = gre.ardt
+    // console.log(gret);
+    const filteredData = result.filter((market) => parseInt(market.ardt) === cityNumber);
+    console.log(filteredData);
     setSelectCity(cityNumber);
     setFilteredMarket(filteredData);
     console.log("selectCity:", cityNumber);
@@ -110,13 +117,13 @@ const Buy = ({ navigation }) => {
         <ScrollView>
           {filteredMarket.length > 0 ? (
             filteredMarket.map((post) => (
-              <View style={styles.boxinfos} key={post._id}>
-                <Text style={styles.Title}>{post.nom}</Text>
-                <Text style={styles.text}>Ouverture: {post.ouverture}</Text>
+              <View style={styles.boxinfos} key={post.id_marche}>
+                <Text style={styles.Title}>{post.nom_long}</Text>
+                <Text style={styles.text}>Ouverture: {post.jours_tenue}</Text>
                 <Text style={styles.text}>
-                  Heure: {post.timeD}, {post.timeF}{" "}
+                  Heure: {post.h_deb_sem_1}, {post.h_fin_sem_1}{" "}
                 </Text>
-                <Text style={styles.text}>Adresse: {post.adresse}</Text>
+                <Text style={styles.text}>Adresse: {post.localisation}</Text>
 
                 {/* <Button onPress={() => {
                   console.log(post)

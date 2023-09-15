@@ -36,7 +36,7 @@ const ProductFilter = ({ route }) => {
     //server to be on the same Ip and the phone to be able to access the server
     //
     console.log('hello');
-        const response = await fetch("http://localhost:8000/api/data");
+        const response = await fetch("http://192.168.4.211:8000/api/data");
         // console.log(response);
     
         const jsondata = await response.json();
