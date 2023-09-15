@@ -50,9 +50,7 @@ const Buy = ({ navigation }) => {
 
   const handleCitySelected = (city) => {
     const cityNumber = parseInt(city);
-    // let gre = result[0]
-    // let gret = gre.ardt
-    // console.log(gret);
+    
     const filteredData = result.filter((market) => parseInt(market.ardt) === cityNumber);
     console.log(filteredData);
     setSelectCity(cityNumber);
