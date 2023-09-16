@@ -1,9 +1,11 @@
 import React from 'react'
+import { TouchableOpacity, Image } from 'react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import { MaterialCommunityIcons as Icon } from '@expo/vector-icons';
 import Buy from "./Buy";
 import Recycle from "./Recycle"
 import Favorite from "./Favorite"
+import Profile from "./Profile"
 import Home from './Home';
 import ProductFilter from './ProductFilter';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -12,10 +14,23 @@ const Tab = createMaterialBottomTabNavigator()
 
 const HomeStack = createNativeStackNavigator();
 
-function HomeStackScreen() {
+function HomeStackScreen({navigation}) {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen name="Accueil" component={Home} />
+     <HomeStack.Screen 
+    name="Accueil" 
+    component={Home} 
+    options={{
+      headerRight: () => (
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <Image 
+            source={require('../../assets/login.jpg')}
+            style={{ width: 40, height: 40, borderRadius: 20, marginRight: 10 }}
+          />
+        </TouchableOpacity>
+      ),
+    }}
+  />
     </HomeStack.Navigator>
   );
 }

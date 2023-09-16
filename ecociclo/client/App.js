@@ -1,59 +1,45 @@
-import { NavigationContainer } from '@react-navigation/native';
-import HomeLink from './src/screens/HomeLink';
-import * as SplashScreen from 'expo-splash-screen'
-import { useEffect } from 'react';
-import ProductFilter from './src/screens/ProductFilter';
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect, useContext } from "react";
+import { AppRegistry } from 'react-native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Favorite from './src/screens/Favorite';
-import Buy from './src/screens/Buy';
-import Recycle from './src/screens/Recycle';
+import AppNav from "./src/navigation/AppNav";
+import {AuthProvider} from "./src/context/AuthContext";
+import { name as appName } from './app.json';
 
-const Stack = createNativeStackNavigator();
 
-async function setupSplashScreen(){
-  try{
-    console.log('splash screen');
+AppRegistry.registerComponent(appName, () => App);
+
+async function setupSplashScreen() {
+  try {
+    console.log("splash screen");
 
     await SplashScreen.preventAutoHideAsync();
-    console.log('Attendre 3 secondes');
+    console.log("Attendre 3 secondes");
 
-    await new Promise(resolve => setTimeout(resolve,3000));
-    console.log('reveler splash screen');
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    console.log("reveler splash screen");
 
     await SplashScreen.hideAsync();
-    console.log('Splash screen caché');
-
-
-  } catch(error){
-    console.warn(error)
+    console.log("Splash screen caché");
+  } catch (error) {
+    console.warn(error);
   }
 }
 
 export default function App() {
+ 
   useEffect(() => {
-    setupSplashScreen()
+    setupSplashScreen();
   }, []);
+  
 
   return (
-    <NavigationContainer>
-    <Stack.Navigator initialRouteName='HomeTab'>
-      <Stack.Screen
-        name="HomeTab"
-        component={HomeLink}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen name="Produit" component={ProductFilter} />
-      <Stack.Screen name="Favorite" component={Favorite} />
-      <Stack.Screen name="Buy" component={Buy} />
-      <Stack.Screen name="Recycle" component={Recycle} />
-    </Stack.Navigator>
-  </NavigationContainer>
+    <AuthProvider>
+      <AppNav />
+    </AuthProvider>
+    //   <NavigationContainer>
+    //    <HomeLink/>
 
-  //   <NavigationContainer>
-  //    <HomeLink/>
-     
-  //  </NavigationContainer>
+    //  </NavigationContainer>
   );
 }
-
-
