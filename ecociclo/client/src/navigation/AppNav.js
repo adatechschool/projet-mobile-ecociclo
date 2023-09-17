@@ -6,6 +6,7 @@ import Favorite from "../screens/Favorite";
 import Buy from "../screens/Buy";
 import Recycle from "../screens/Recycle";
 import LoginScreen from "../screens/Login";
+import RegisterScreen from "../screens/Register";
 import { AuthContext } from "../context/AuthContext";
 import { View, ActivityIndicator } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -14,16 +15,14 @@ const Stack = createNativeStackNavigator();
 
 const AppNav = () => {
   const { isloading, userToken } = useContext(AuthContext);
- 
+
   if (isloading) {
-   return(
+    return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         <ActivityIndicator size={"large"} />
       </View>
-   )
+    );
   }
-  
-  
 
   return (
     <NavigationContainer>
@@ -46,6 +45,11 @@ const AppNav = () => {
             name="Login"
             component={LoginScreen}
             options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
+            options={{ headerTitle: "Register" }}
           />
         </Stack.Navigator>
       )}
