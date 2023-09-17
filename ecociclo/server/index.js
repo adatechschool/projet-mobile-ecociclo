@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import dataRoutes from "./routes/dataRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 dotenv.config();
 
@@ -22,5 +23,6 @@ app.use(morgan("dev"));
 // routes middlewares
 
 app.use("/api/", dataRoutes);
+app.use("/user/", userRoutes);
 
 app.listen(8000,'0.0.0.0',(console.log("Server running on port 8000"))) // But 0,0,0,0 for allowing all Ip to connect
