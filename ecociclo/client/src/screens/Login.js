@@ -13,7 +13,7 @@ import Login from "../../assets/login2.jpg";
 import { AuthContext } from "../context/AuthContext";
 // import FastImage from 'react-native-fast-image';
 
-export default function LoginScreen({navigation}) {
+export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -25,6 +25,10 @@ export default function LoginScreen({navigation}) {
       resizeMode="cover"
     >
       <View style={styles.container}>
+      <View style={styles.opacityContainer}>
+
+      <Text style={styles.title}>Welcome Back!</Text>
+        <Text style={styles.subtitle}>Discover markets near you and recycle with ease.</Text>
         <TextInput
           placeholder="Email"
           style={styles.input}
@@ -39,12 +43,20 @@ export default function LoginScreen({navigation}) {
           onChangeText={setPassword}
         />
 
-        <Button title="Login" onPress={() => login(email, password)} />
+        <TouchableOpacity
+          title="Login"
+          style={styles.loginButton}
+          onPress={() => login(email, password)}
+        >
+          <Text style={styles.loginButtonText}>Login</Text>
+        </TouchableOpacity>
+
         <TouchableOpacity onPress={() => navigation.navigate("Register")}>
-          <Text style={{ color: "blue" }}>
+          <Text style={styles.redirectButton}>
             Don't have an account yet? Register here.
           </Text>
         </TouchableOpacity>
+      </View>
       </View>
     </ImageBackground>
   );
@@ -58,8 +70,26 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    // backgroundColor: "rgba(0, 0, 0, 0.5)", 
+  },
+  opacityContainer: {
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    borderRadius: 10, 
+    alignItems: 'center',
+    width: "90%", 
     padding: 20,
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Optional: adds a semi-transparent overlay
+  },
+
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: 'white',
+    marginBottom: 10,
+  },
+  subtitle: {
+    fontSize: 16,
+    color: 'white',
+    marginBottom: 20,
   },
   backgroundImage: {
     flex: 1,
@@ -67,12 +97,40 @@ const styles = StyleSheet.create({
     height: screenHeight,
   },
   input: {
-    width: "100%",
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1,
-    marginBottom: 10,
-    padding: 5,
+    width: "90%", 
+    height: 45,  
+    borderColor: "#C19ECF", 
+    borderWidth: 1.5,
+    marginBottom: 12,
+    padding: 10,  
+    borderRadius: 12,  
     backgroundColor: "white",
+    fontSize: 16,  
+    color: "#4A4A4A",   
+},
+  loginButton: {
+    marginBottom:10,
+    backgroundColor: "lightpink", 
+    padding: 12,
+    borderRadius: 12,  
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#9F79EE",  
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.30,
+    shadowRadius: 4.65,
+    elevation: 8,
+},
+loginButtonText: {
+    color: "white",
+    fontWeight: "bold",  
+    fontSize: 16,
+},
+  redirectButton: {
+    color: "white",
+    fontWeight: "bold",
   },
 });
