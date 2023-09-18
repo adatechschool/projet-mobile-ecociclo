@@ -11,6 +11,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Register from "../../assets/login2.jpg";
+import FastImage from 'react-native-fast-image'
 
 const RegisterScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
@@ -137,7 +138,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     fontSize: 16,
     color: "#4A4A4A",
-    placeholderTextColor: "#B6A1D2",
   },
   registerButton: {
     marginBottom: 10,
