@@ -141,9 +141,13 @@ const Buy = ({ navigation }) => {
                         ? JSON.parse(favorites)
                         : [];
                       if (
-                        !parsedFavorites.some((fav) => fav._id === post._id)
+                        !parsedFavorites.some((fav) => fav.id_marche === post.id_marche)
                       ) {
-                        parsedFavorites.push(post);
+                        const marketFavorite = {
+                          ...post,
+                          type: 'market'
+                      };
+                        parsedFavorites.push(marketFavorite);
                         await AsyncStorage.setItem(
                           "favorites",
                           JSON.stringify(parsedFavorites)

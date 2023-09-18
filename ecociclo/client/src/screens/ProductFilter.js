@@ -15,7 +15,7 @@ import { box } from "./Recycle";
 import { Picker } from "@react-native-picker/picker";
 import { TextInput } from "react-native-paper";
 import { Fake } from "./DataFake";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 const ProductFilter = ({ route }) => {
@@ -155,7 +155,35 @@ const ProductFilter = ({ route }) => {
                     Heure: {post.timeD}, {post.timeF}{" "}
                   </Text>
                   <Text style={styles.text}>Adresse: {post.adresse}</Text>
-                  <Button title="google map" color="grey" />
+                  {/* <Button title="google map" color="grey" /> */}
+                  <Button
+    onPress={async () => {
+        try {
+            const favorites = await AsyncStorage.getItem("favorites");
+            const parsedFavorites = favorites ? JSON.parse(favorites) : [];
+            
+            if (!parsedFavorites.some((fav) => fav._id === post._id)) {
+
+                const recycleFavorite = {
+                    ...post,
+                    type: 'recycle'
+                };
+
+                parsedFavorites.push(recycleFavorite);
+                await AsyncStorage.setItem(
+                    "favorites",
+                    JSON.stringify(parsedFavorites)
+                );
+            } else {
+                console.log("You already added this item to favorites");
+            }
+        } catch (error) {
+            console.error("Failed to save favorite:", error);
+        }
+    }}
+    title="💙"
+    color="grey"
+/>
                 </View>
               ))
             ) : (
