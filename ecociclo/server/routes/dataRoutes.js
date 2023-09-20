@@ -1,6 +1,7 @@
 import express from "express";
 import MarketAndRecycle from "../models/dataModels.js";
 const router = express.Router();
+import { authPage } from "../middlewares/Authmiddleware.js";
 
 // Get routes
 router.get("/data", async (req, res) => {
@@ -16,7 +17,7 @@ router.get("/data", async (req, res) => {
 
 // Post routes
 
-router.post("/data", async (req, res) => {
+router.post("/data", authPage(["admin"]), async (req, res) => {
   try {
     const store = new MarketAndRecycle(req.body); // Create a new MarketAndRecycle instance
     await store.save(); // Save to database

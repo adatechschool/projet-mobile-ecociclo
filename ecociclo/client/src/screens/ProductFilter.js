@@ -10,37 +10,35 @@ import {
   Keyboard,
   Button,
 } from "react-native";
-import React, { useState, useEffect }  from "react";
+import React, { useState, useEffect } from "react";
 import { box } from "./Recycle";
 import { Picker } from "@react-native-picker/picker";
 import { TextInput } from "react-native-paper";
 import { Fake } from "./DataFake";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
 const ProductFilter = ({ route }) => {
-  const {boxId, boxText} = route.params;
-  console.log({boxId});
-  console.log({boxText})
+  const { boxId, boxText } = route.params;
+  console.log({ boxId });
+  console.log({ boxText });
 
   const [isMenuVisible, setIsMenuVisible] = useState(false);
   const [data, setData] = useState([]);
   const [selectCity, setSelectCity] = useState(null);
   const [filteredMarket, setFilteredMarket] = useState([]);
-  
-  useEffect(() => {
 
+  useEffect(() => {
     async function ProductData() {
       try {
-    // But your Ip address instead of localhost for your phone and the 
-    //server to be on the same Ip and the phone to be able to access the server
-    //
-    console.log('hello');
+        // But your Ip address instead of localhost for your phone and the
+        //server to be on the same Ip and the phone to be able to access the server
+        //
+        console.log("hello");
         const response = await fetch("http://localhost:8000/api/data");
         // console.log(response);
-    
+
         const jsondata = await response.json();
-        setData(jsondata)
+        setData(jsondata);
         console.log(setData);
       } catch (error) {
         console.log("There was an error", error);
@@ -48,53 +46,48 @@ const ProductFilter = ({ route }) => {
       }
     }
 
-  ProductData();
+    ProductData();
   }, []);
-  
 
-  
-  const imageSource = 
-    { 
-    'Furniture':require('../../assets/meub.png'),
-    'Clothing':require('../../assets/cloth.png'),
-    'Household' : require('../../assets/elect3.png'),
-    'Compost':require('../../assets/compost3.png'),
+  const imageSource = {
+    Furniture: require("../../assets/meub.png"),
+    Clothing: require("../../assets/cloth.png"),
+    Household: require("../../assets/elect3.png"),
+    Compost: require("../../assets/compost3.png"),
   };
-  
-  const selectedImageSource = imageSource[boxText] || null
 
-  const sentence = 
-  {
-    'Furniture':"Points d'apport volontaire - Recycleries et ressourceries",
-    'Clothing':"Points d'apport volontaire - Recycleries et ressourceries",
-    'Household':"Points d'apport volontaire - Recycleries et ressourceries",
-    'Compost':'Les marchés de proximité collectent vos déchets alimentaires',
+  const selectedImageSource = imageSource[boxText] || null;
+
+  const sentence = {
+    Furniture: "Points d'apport volontaire - Recycleries et ressourceries",
+    Clothing: "Points d'apport volontaire - Recycleries et ressourceries",
+    Household: "Points d'apport volontaire - Recycleries et ressourceries",
+    Compost: "Les marchés de proximité collectent vos déchets alimentaires",
   };
-  
-  const selectedSentence = sentence[boxText] || null
+
+  const selectedSentence = sentence[boxText] || null;
 
   const handleCitySelected = (city) => {
-    const cityNumber = parseInt(city)
-    const filteredData = data.filter((market) => market.ardt === cityNumber && market.tag ===boxText);
+    const cityNumber = parseInt(city);
+    const filteredData = data.filter(
+      (market) => market.ardt === cityNumber && market.tag === boxText
+    );
     setSelectCity(cityNumber);
     // console.log(filteredData);
     setFilteredMarket(filteredData);
-        // console.log('selectCity:',cityNumber);
-
-
-  }
+    // console.log('selectCity:',cityNumber);
+  };
 
   return (
     <View style={styles.container}>
       <View style={styles.Maintitle}>
-          <Text style={{fontSize:30}}> {boxText} </Text>
-          
-          {selectedSentence && (
-                      <Text style={{fontSize:20, margin: 10, textAlign: 'center'}}>
-                        {selectedSentence}
-                      </Text>
-                      
-                    )}
+        <Text style={{ fontSize: 30 }}> {boxText} </Text>
+
+        {selectedSentence && (
+          <Text style={{ fontSize: 20, margin: 10, textAlign: "center" }}>
+            {selectedSentence}
+          </Text>
+        )}
       </View>
 
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -157,33 +150,40 @@ const ProductFilter = ({ route }) => {
                   <Text style={styles.text}>Adresse: {post.adresse}</Text>
                   {/* <Button title="google map" color="grey" /> */}
                   <Button
-    onPress={async () => {
-        try {
-            const favorites = await AsyncStorage.getItem("favorites");
-            const parsedFavorites = favorites ? JSON.parse(favorites) : [];
-            
-            if (!parsedFavorites.some((fav) => fav._id === post._id)) {
+                    onPress={async () => {
+                      try {
+                        const favorites = await AsyncStorage.getItem(
+                          "favorites"
+                        );
+                        const parsedFavorites = favorites
+                          ? JSON.parse(favorites)
+                          : [];
 
-                const recycleFavorite = {
-                    ...post,
-                    type: 'recycle'
-                };
+                        if (
+                          !parsedFavorites.some((fav) => fav._id === post._id)
+                        ) {
+                          const recycleFavorite = {
+                            ...post,
+                            type: "recycle",
+                          };
 
-                parsedFavorites.push(recycleFavorite);
-                await AsyncStorage.setItem(
-                    "favorites",
-                    JSON.stringify(parsedFavorites)
-                );
-            } else {
-                console.log("You already added this item to favorites");
-            }
-        } catch (error) {
-            console.error("Failed to save favorite:", error);
-        }
-    }}
-    title="💙"
-    color="grey"
-/>
+                          parsedFavorites.push(recycleFavorite);
+                          await AsyncStorage.setItem(
+                            "favorites",
+                            JSON.stringify(parsedFavorites)
+                          );
+                        } else {
+                          console.log(
+                            "You already added this item to favorites"
+                          );
+                        }
+                      } catch (error) {
+                        console.error("Failed to save favorite:", error);
+                      }
+                    }}
+                    title="💙"
+                    color="grey"
+                  />
                 </View>
               ))
             ) : (
@@ -204,140 +204,71 @@ const ProductFilter = ({ route }) => {
   );
 };
 
-  const screenWidth = Dimensions.get("window").width;
-  const boxWidth = (screenWidth - 40) / 2;
-  
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      alignItems: "center",
-      marginTop: 20,
-    },
-    boxinfos: {
-      backgroundColor: "#F2C6C2",
-      minHeight: boxWidth / 1.5, // To Modify
-      width: boxWidth * 2,
-      margin: 10,
-      borderRadius: 5,
-      overflow:"visible",
-      padding:10,
-    },
-    input: {
-      backgroundColor: "#B8C3D3",
-      multiline: "true",
-      width: boxWidth * 1.4,
-      margin:20,
-      fontSize:20,
-      alignItems:"center"
-    },
-    buttonText: {
-      color: "white",
-      fontSize: 16,
-      textAlign: "center",
-    },
-    inputContainer: {
-      width: boxWidth * 2,
-      alignItems: "center",
-      zIndex: 1,
-    },
-    Menu: {
-      backgroundColor: "#f8f8f8",
-      padding: 10,
-      position: "absolute",
-      top: 60,
-      width: boxWidth * 1.4,
-      borderRadius: 5,
-      borderWidth: 1,
-      borderColor: "#ccc",
-    },
-    Title:{
-      fontSize:20,
-    
-    },
-    text:{
-      marginBottom:5,
-    },
-    Maintitle: {
-      display:'flex',
-      marginTop: 30,
-      fontSize: 40,
-      fontWeight: 'bold',
-      alignItems: 'center',
-      textAlign: 'center'
-      
-    },
-    images:{
-      marginBottom: 0,
-      width:395,
-      height:365,
-    }
-    
-  });
-  
-   
+const screenWidth = Dimensions.get("window").width;
+const boxWidth = (screenWidth - 40) / 2;
 
-// const screenWidth = Dimensions.get("window").width;
-// const boxWidth = (screenWidth - 40) / 2;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    marginTop: 20,
+  },
+  boxinfos: {
+    backgroundColor: "#F2C6C2",
+    minHeight: boxWidth / 1.5, // To Modify
+    width: boxWidth * 2,
+    margin: 10,
+    borderRadius: 5,
+    overflow: "visible",
+    padding: 10,
+  },
+  input: {
+    backgroundColor: "#B8C3D3",
+    multiline: "true",
+    width: boxWidth * 1.4,
+    margin: 20,
+    fontSize: 20,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+    textAlign: "center",
+  },
+  inputContainer: {
+    width: boxWidth * 2,
+    alignItems: "center",
+    zIndex: 1,
+  },
+  Menu: {
+    backgroundColor: "#f8f8f8",
+    padding: 10,
+    position: "absolute",
+    top: 60,
+    width: boxWidth * 1.4,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#ccc",
+  },
+  Title: {
+    fontSize: 20,
+  },
+  text: {
+    marginBottom: 5,
+  },
+  Maintitle: {
+    display: "flex",
+    marginTop: 30,
+    fontSize: 40,
+    fontWeight: "bold",
+    alignItems: "center",
+    textAlign: "center",
+  },
+  images: {
+    marginBottom: 0,
+    width: 395,
+    height: 365,
+  },
+});
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     alignItems: "center",
-//     marginTop: 20,
-//   },
-//   boxinfos: {
-//     backgroundColor: "#F2C6C2",
-//     minHeight: boxWidth / 1.5, // To Modify
-//     width: boxWidth * 2,
-//     margin: 10,
-//     borderRadius: 5,
-//     overflow: "visible",
-//     padding: 10,
-//   },
-//   input: {
-//     backgroundColor: "#B8C3D3",
-//     multiline: "true",
-//     width: boxWidth * 1.4,
-//     margin: 20,
-//     fontSize: 20,
-//     alignItems: "center",
-//   },
-//   buttonText: {
-//     color: "white",
-//     fontSize: 16,
-//     textAlign: "center",
-//   },
-//   inputContainer: {
-//     width: boxWidth * 2,
-//     alignItems: "center",
-//     zIndex: 1,
-//   },
-//   Menu: {
-//     backgroundColor: "#f8f8f8",
-//     padding: 10,
-//     position: "absolute",
-//     top: 60,
-//     width: boxWidth * 1.4,
-//     borderRadius: 5,
-//     borderWidth: 1,
-//     borderColor: "#ccc",
-//   },
-//   Title: {
-//     fontSize: 40,
-//   },
-//   text: {
-//     marginBottom: 5,
-//   },
-//   Maintitle: {
-//     marginTop: 30,
-//     fontSize: 40,
-//     fontWeight: "bold",
-//   },
-//   images: {
-//     marginBottom: 0,
-//     width: 395,
-//     height: 365,
-//   },
-// });
-
-export default ProductFilter
+export default ProductFilter;
