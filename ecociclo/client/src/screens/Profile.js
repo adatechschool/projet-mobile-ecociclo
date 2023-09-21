@@ -164,29 +164,29 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#f5f5f5", // A light grey background color
+    backgroundColor: "#f5f5f5", 
   },
   header: {
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
-    color: "#333", // Dark grey color for the text
+    color: "#333",
   },
   input: {
     borderWidth: 1,
-    borderColor: "#ddd", // Light grey border color
+    borderColor: "#ddd",
     marginBottom: 10,
     padding: 8,
     borderRadius: 5,
     width: 280,
-    backgroundColor: "#fff", // White background for the input
+    backgroundColor: "#fff", 
   },
   button: {
     padding: 15,
     backgroundColor: "#4CAF50",
     alignItems: "center",
     borderRadius: 5,
-    marginTop: 10, // Adds a margin top to the button
+    marginTop: 10,
   },
   buttonText: {
     color: "white",
@@ -199,8 +199,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logoutText: {
-    marginLeft: 10, // Adds a little space between the icon and the text
-    color: "#f00", // Red color for the sign out text
+    marginLeft: 10,
+    color: "#f00",
   },
 });
 
